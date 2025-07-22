@@ -9,6 +9,8 @@ const server = http.createServer((req, res) => {
 
     // Read All Data
     fs.readFile(filePath, "utf8", (error, data) => {
+
+        // When file is empty or conatains invalid json return [] array
         let startingData = []
 
         if (!error && data) {
@@ -77,7 +79,6 @@ const server = http.createServer((req, res) => {
                       });
                     const deleteMain = startingData.length !== deleteAll.length;
                     
-                 
                 fs.writeFile(filePath, JSON.stringify(deleteAll, null, 2), "utf8", (err) => {
                     if(err) {
                         res.writeHead(500, {"Content-type" : "text/plain"});
